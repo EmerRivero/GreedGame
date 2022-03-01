@@ -1,7 +1,7 @@
 from tkinter import *
 from random import *
 import tkinter.messagebox
-
+import random
 
 #Megan Contribution
 class ScoreBoard():
@@ -43,11 +43,11 @@ class ItemsFallingFromSky():
         
         # create falling items
         if self.isgood:   
-            self.itemPhoto = tkinter.PhotoImage(file = "c:/Users/ASUS/Desktop/greed/images/{}" .format(choice(self.goodItems) ) )
+            self.itemPhoto = tkinter.PhotoImage(file = "greed/images/{}" .format(choice(self.goodItems) ) )
             self.fallItem = self.canvas.create_image( (self.xPosition, 50) , image=self.itemPhoto , tag="good" )
         
         else:
-            self.itemPhoto = tkinter.PhotoImage(file = "c:/Users/ASUS/Desktop/greed/images/{}" . format(choice(self.badItems) ) )
+            self.itemPhoto = tkinter.PhotoImage(file = "greed/images/{}" . format(choice(self.badItems) ) )
             self.fallItem = self.canvas.create_image( (self.xPosition, 50) , image=self.itemPhoto , tag="bad" )
             
         # trigger falling item movement
@@ -79,12 +79,17 @@ class ItemsFallingFromSky():
             self.board.updateBoard(-1)                                               # (score)
             return True                                                                 # touching yes
         return False                                                                    # touching not
-    
+#Dittrich and Harris Part  
+class Player():
+    def player(self):
+        choice = random.randint(1,3)
+        return choice
 
-#Dittrich and Harris Part
-class TheGame(ItemsFallingFromSky,ScoreBoard):
+class TheGame(ItemsFallingFromSky,ScoreBoard, Player):
     
     def __init__(self,parent):
+        player = Player().player()
+
         self.parent = parent
         
         # windows form
@@ -99,7 +104,15 @@ class TheGame(ItemsFallingFromSky,ScoreBoard):
         self.canvas.grid(row=1, column=1, padx=25, pady=25, sticky=W+N)
 
         # player character
-        self.playerPhoto = tkinter.PhotoImage(file = "c:/Users/ASUS/Desktop/greed/images/{}" .format( "ship2.png" ) )
+        if player == 1:
+            self.playerPhoto = tkinter.PhotoImage(file = "greed/images/{}" .format( "ship2.png" ) )
+
+        elif player == 2:
+            self.playerPhoto = tkinter.PhotoImage(file = "greed/images/{}" .format( "rocket.png" ) )
+
+        else:
+            self.playerPhoto = tkinter.PhotoImage(file = "greed/images/{}" .format( "rocket2.png" ) )
+
         self.playerChar = self.canvas.create_image( (475, 560) , image=self.playerPhoto , tag="player" )
 
         # define score board
@@ -110,9 +123,9 @@ class TheGame(ItemsFallingFromSky,ScoreBoard):
         
         #Joseph Anucha
     def keyMoving(self, event):        
-        if (event.char == "z") and (self.canvas.coords(self.playerChar)[0] > 50):
+        if (event.char == "z" or event.keysym == "Left") and (self.canvas.coords(self.playerChar)[0] > 50):
             self.canvas.move(self.playerChar, -50, 0)            
-        if (event.char == "x") and (self.canvas.coords(self.playerChar)[0] < 750):
+        if (event.char == "x" or event.keysym == "Right") and (self.canvas.coords(self.playerChar)[0] < 750):
             self.canvas.move(self.playerChar, 50, 0)
 
 
