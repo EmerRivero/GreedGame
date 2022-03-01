@@ -14,9 +14,12 @@ Joseph Anucha
 
     Gems (💎) and rocks (🌑) randomly appear and fall from the top of the screen.
     The player (🛸) can move left (Z) or right (X) along the bottom of the screen.
+    You can also move with arrows right and left 
     If the player touches a gem they earn a point.
     If the player touches a rock they lose a point.
     Gems and rocks are removed when the player touches them.
     The game continues until the player closes the window.
 
-----------------------------------NOTE: change game directory-----------------
+----------------------------------NOTE: change game directory----------------- (old version)
+
+update: you don't need to change the directory anymore (new version)
